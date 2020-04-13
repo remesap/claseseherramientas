@@ -11,7 +11,7 @@ int main(void)
 
   double histo[NBINS] = {0.0};
  
-  std::mt19937 gen(SEDD); //declarando el generador
+  std::mt19937 gen(SEED); //declarando el generador
   std::uniform_real_distribution<double> dis(XMIN, XMAX);
   
   for (int ii = 0; ii < N; ii++)
