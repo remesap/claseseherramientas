@@ -1,0 +1,138 @@
+COMANDOS BÁSICOS DE BASH:
+
+-Mover y renombrar archivos:
+
+  mv filetomove /directory/newnamefile
+
+
+
+INSTALACIÓN DE PROGRAMAS:
+1-Descomprimir:
+  tar -xvf fftw-3.3.8.tar.gz
+  unzip filename.zip 
+  
+
+-Para agregar un directorio al PATH, por ejemplo el directorio  $HOME/local/bin :
+
+  export PATH=$PATH:$HOME/bin
+
+  NOTA: como estaremos instalando cosas en nuestro directorio home, tenemos que agregar
+  	el directorio $HOME/local al PATH (DISCLAIMER: en realidad esto no es necesario)
+
+ . según nos indican en "https://pachterlab.github.io/kallisto/local_build.html":
+   "
+     to add $HOME/bin to your PATH, run the following from your terminal
+     export PATH=$HOME/bin:$PATH
+     export LD_LIBRARY_PATH=$HOME/lib/:$LD_LIBRARY_PATH
+									"
+
+2-Configurando la instalación:
+
+  *si el programa tiene un script de configuración:
+
+      ./configure --prefix=$HOME/local
+
+  *si el programa usa cmake: #con cmake, posiblemente haya que agregar $HOME/local al PATH (ver paso 1)
+
+      mkdir build
+      cd build
+      cmake ../ -DCMAKE_INSTALL_PREFIX=PATH:$HOME/local
+      alternativamente	cmake -DCMAKE_INSTALL_PREFIX=$HOME ..según "patcherlab.git..." (funcionó con fmt)
+
+  *luego de utilizar alguna de las configuraciones anteriores, compilamos e instalamos con:
+
+      make -j 3 #para compilar con 3 nucleos, en general basta con los comandos "make" o "make -j 1" si no se está seguro
+      #antes de instalar se puede testear la libreria con el comando "make check"
+      make install #instala los programas en el directorio "prefix"
+
+
+3-Compilar programas con las librerías que se instalaron:
+
+      g++ -L $HOME/local/lib -I $HOME/local/include  programname.cpp -llibname
+
+-Instalando spack:
+
+   git clone https://github.com/spack/spack.git
+   cd spack
+   source share/spack/setup-env.sh 
+   spack bootstrap
+
+  . Instalando gsl con spack:
+
+     spack info gsl
+     spack install gsl@2.5
+
+  .Buscar paquetes:
+
+     spack list | grep eigen
+
+  .Para que el comando "spack" quede siempre, escribir lo siguiente en el archivo .bashrc
+
+     source $HOME/repos/spackrepo/spack/share/spack/setup-env.sh
+
+  . spack load:
+
+    spack load gsl
+    spack unload gsl
+
+  .comprobar revisando:
+
+     echo $PATH
+     echo $LD_LIBRARY_PATH/
+
+
+DEBUGGING:
+
+-Valgrind:
+   $ g++ -g gdb_example_segfault.cpp
+   $ valgrind --tool=memcheck --leak-check=yes ./a.out
+
+  .Instalación:
+
+    1) Descomprimir
+    2) ./configure --prefix=$HOME/valgrind
+    3) make install
+    4) para que quede en el PATH de manera permanente, agregar las siguientes líneas al archivo ~/.bashrc
+
+       export PATH=$PATH:$HOME/valgrind/bin
+       export VALGRIND_LIB="$HOME/valgrind/lib/valgrind"
+
+       y desde la terminal correr el comando source ~/.bashrc
+
+    5) revisar con el comando "which valgrind"
+
+
+
+INSTALAR Slpkg (manejador de paquetes para Slackware):
+
+   cd Downloads
+   wget https://gitlab.com/dslackw/slpkg/-/archive/3.8.6/slpkg-3.8.6.tar.bz2
+   tar xf slpkg-3.8.6.tar.bz2
+   cd slpkg-3.8.6
+   sudo su   #nos da privilegios de root. (o simplemente escribir "su" y poner el password"       
+   ./install.sh
+
+   Ahora debemos decirle a Slpkg que nuestra versión de Slackware es "Slackware current".
+   Abrimos con emacs el archivo /etc/slpkg/slpkg.conf, y cambiamos "RELEASE=stable" por "RELEASE=current".
+
+   emacs /etc/slpkg/slpkg.conf
+   (en emacs podemos buscar texto con "M-x isearch-forward", recordar que en emacs representa la tecla Alt)
+
+   Ahora actualizamos Slpkg:
+
+   slpkg upgrade
+   slpkg update
+
+   Ya podemos instalar determinados paquetes disponibles mediante Slpkg:
+
+   slpkg PACKAGENAME
+
+   
+
+
+   
+
+
+
+
+
