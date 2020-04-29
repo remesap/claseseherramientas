@@ -147,6 +147,12 @@ En el archivo .cpp
    
 #
 
+Testing con googletest:
+
+En un directorio donde tengamos los archivos factorial.cpp factorial.h y quizás testfactorial.cpp
+
+g++ gtest_main.cpp factorial.o -lgtest
+
 
 CLANG FORMAT:
 
