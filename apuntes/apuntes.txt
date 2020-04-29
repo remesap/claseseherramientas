@@ -135,7 +135,7 @@ Clase 2020-04-17:
 En el archivo .cpp 
       #include "catch2/catch.hpp"
 
-*Modularizando el código:
+*Modularizando el código: se escriben aparte factorial.cpp y factorial.h para separar los test del código fuente
 
 #Todos los programas en C++ que quieran crear ejecutables necesitan una función main
 
@@ -146,5 +146,15 @@ En el archivo .cpp
    g++ factorial.o main_factorial.o -o main_factorial.x
    
 #
+
+
+CLANG FORMAT:
+
+   clang-format ugly.cpp
+   clang-format ugly.cpp > better.cpp
+
+-Para ordenar el código de una vez
+
+   clang-format -i ugly.cpp #in place
 
 
