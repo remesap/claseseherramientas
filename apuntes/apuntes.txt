@@ -128,11 +128,23 @@ INSTALAR Slpkg (manejador de paquetes para Slackware):
    slpkg PACKAGENAME
 
    
+Clase 2020-04-17:
 
+      spack install catch2 googletest
 
+En el archivo .cpp 
+      #include "catch2/catch.hpp"
+
+*Modularizando el código:
+
+#Todos los programas en C++ que quieran crear ejecutables necesitan una función main
+
+#Crear archivos objeto para enlazar los códigos
+
+   g++ -c factorial.cpp
+   g++ -c main_factorial.cpp   #se han creado factorial.o y main_factorial.o
+   g++ factorial.o main_factorial.o -o main_factorial.x
    
-
-
-
+#
 
 
