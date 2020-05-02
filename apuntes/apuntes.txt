@@ -164,3 +164,35 @@ CLANG FORMAT:
    clang-format -i ugly.cpp #in place
 
 
+PROFILING
+
+-Su objetivo es medir el tiempo de ejecución de un programa y utilizar esta información para optimizar el programa.
+-El profiler es la herramienta que usamos para ello. Ejemplos de profilers son callgrind, perf, gprof.
+-El profiler nos entrega dos cosas:
+  *El flat profile: una tabla que nos muestra cuánto se demora cada función. Es importante que modularizemos el código.
+  *El call graph: nos dice los tiempos que demoran las distintas funciones en llamarse entre ellas, cómo se enlazan, etc.
+   (la estructura de ejecución del programa)
+  
+ .Uso del profiler:
+    1) se recompila con determinada bandera
+    2) se ejecuta el código
+    3) se utililiza la herramienta
+    4) se analiza el reporte
+
+Elapsed time:
+
+   time ./a.out
+   /usr/bin/time ./a.out
+
+Timers internos: se usa la librería chrono
+
+  g++ -fconcepts timers.2cpp
+  /usr/bin/time ./a.out 5000 6000
+
+  .Es necesario ejecutarlo varais veces e inventarse casos que demoren varios segundos para tener mayor resolución.
+       
+
+
+
+
+
