@@ -1,4 +1,4 @@
-COMANDOS B¡SICOS DE BASH:
+COMANDOS B√ÅSICOS DE BASH:
 
 -Mover y renombrar archivos:
 
@@ -6,7 +6,7 @@ COMANDOS B¡SICOS DE BASH:
 
 
 
-INSTALACI”N DE PROGRAMAS:
+INSTALACI√ìN DE PROGRAMAS:
 1-Descomprimir:
   tar -xvf fftw-3.3.8.tar.gz
   unzip filename.zip 
@@ -19,16 +19,16 @@ INSTALACI”N DE PROGRAMAS:
   NOTA: como estaremos instalando cosas en nuestro directorio home, tenemos que agregar
   	el directorio $HOME/local al PATH (DISCLAIMER: en realidad esto no es necesario)
 
- . seg˙n nos indican en "https://pachterlab.github.io/kallisto/local_build.html":
+ . seg√∫n nos indican en "https://pachterlab.github.io/kallisto/local_build.html":
    "
      to add $HOME/bin to your PATH, run the following from your terminal
      export PATH=$HOME/bin:$PATH
      export LD_LIBRARY_PATH=$HOME/lib/:$LD_LIBRARY_PATH
 									"
 
-2-Configurando la instalaciÛn:
+2-Configurando la instalaci√≥n:
 
-  *si el programa tiene un script de configuraciÛn:
+  *si el programa tiene un script de configuraci√≥n:
 
       ./configure --prefix=$HOME/local
 
@@ -37,16 +37,16 @@ INSTALACI”N DE PROGRAMAS:
       mkdir build
       cd build
       cmake ../ -DCMAKE_INSTALL_PREFIX=PATH:$HOME/local
-      alternativamente	cmake -DCMAKE_INSTALL_PREFIX=$HOME ..seg˙n "patcherlab.git..." (funcionÛ con fmt)
+      alternativamente	cmake -DCMAKE_INSTALL_PREFIX=$HOME ..seg√∫n "patcherlab.git..." (funcion√≥ con fmt)
 
   *luego de utilizar alguna de las configuraciones anteriores, compilamos e instalamos con:
 
-      make -j 3 #para compilar con 3 nucleos, en general basta con los comandos "make" o "make -j 1" si no se est· seguro
+      make -j 3 #para compilar con 3 nucleos, en general basta con los comandos "make" o "make -j 1" si no se est√° seguro
       #antes de instalar se puede testear la libreria con el comando "make check"
       make install #instala los programas en el directorio "prefix"
 
 
-3-Compilar programas con las librerÌas que se instalaron:
+3-Compilar programas con las librer√≠as que se instalaron:
 
       g++ -L $HOME/local/lib -I $HOME/local/include  programname.cpp -llibname
 
@@ -84,7 +84,7 @@ INSTALACI”N DE PROGRAMAS:
 DEBUGGING:
 
 -gdb:
-   $ g++ -g operations.c -lm #en C se enlaza con la librerÌa matem·tica
+   $ g++ -g operations.c -lm #en C se enlaza con la librer√≠a matem√°tica
    $ gdb ./a.out
    (gdb) run
    
@@ -92,12 +92,12 @@ DEBUGGING:
    $ g++ -g gdb_example_segfault.cpp
    $ valgrind --tool=memcheck --leak-check=yes ./a.out
 
-  .InstalaciÛn:
+  .Instalaci√≥n:
 
     1) Descomprimir
     2) ./configure --prefix=$HOME/valgrind
     3) make install
-    4) para que quede en el PATH de manera permanente, agregar las siguientes lÌneas al archivo ~/.bashrc
+    4) para que quede en el PATH de manera permanente, agregar las siguientes l√≠neas al archivo ~/.bashrc
 
        export PATH=$PATH:$HOME/valgrind/bin
        export VALGRIND_LIB="$HOME/valgrind/lib/valgrind"
@@ -117,7 +117,7 @@ INSTALAR Slpkg (manejador de paquetes para Slackware):
    sudo su   #nos da privilegios de root. (o simplemente escribir "su" y poner el password"       
    ./install.sh
 
-   Ahora debemos decirle a Slpkg que nuestra versiÛn de Slackware es "Slackware current".
+   Ahora debemos decirle a Slpkg que nuestra versi√≥n de Slackware es "Slackware current".
    Abrimos con emacs el archivo /etc/slpkg/slpkg.conf, y cambiamos "RELEASE=stable" por "RELEASE=current".
 
    emacs /etc/slpkg/slpkg.conf
@@ -140,11 +140,11 @@ Clase 2020-04-17:
 En el archivo .cpp 
       #include "catch2/catch.hpp"
 
-*Modularizando el cÛdigo: se escriben aparte factorial.cpp y factorial.h para separar los test del cÛdigo fuente
+*Modularizando el c√≥digo: se escriben aparte factorial.cpp y factorial.h para separar los test del c√≥digo fuente
 
-#Todos los programas en C++ que quieran crear ejecutables necesitan una funciÛn main
+#Todos los programas en C++ que quieran crear ejecutables necesitan una funci√≥n main
 
-#Crear archivos objeto para enlazar los cÛdigos
+#Crear archivos objeto para enlazar los c√≥digos
 
    g++ -c factorial.cpp
    g++ -c main_factorial.cpp   #se han creado factorial.o y main_factorial.o
@@ -154,7 +154,7 @@ En el archivo .cpp
 
 Testing con googletest:
 
-En un directorio donde tengamos los archivos factorial.cpp factorial.h y quiz·s testfactorial.cpp
+En un directorio donde tengamos los archivos factorial.cpp factorial.h y quiz√°s testfactorial.cpp
 
 g++ gtest_main.cpp factorial.o -lgtest
 
@@ -164,23 +164,23 @@ CLANG FORMAT:
    clang-format ugly.cpp
    clang-format ugly.cpp > better.cpp
 
--Para ordenar el cÛdigo de una vez
+-Para ordenar el c√≥digo de una vez
 
    clang-format -i ugly.cpp #in place
 
 
 PROFILING
 
--Su objetivo es medir el tiempo de ejecuciÛn de un programa y utilizar esta informaciÛn para optimizar el programa.
+-Su objetivo es medir el tiempo de ejecuci√≥n de un programa y utilizar esta informaci√≥n para optimizar el programa.
 -El profiler es la herramienta que usamos para ello. Ejemplos de profilers son callgrind, perf, gprof.
 -El profiler nos entrega dos cosas:
-  *El flat profile: una tabla que nos muestra cu·nto se demora cada funciÛn. Es importante que modularizemos el cÛdigo.
-  *El call graph: nos dice los tiempos que demoran las distintas funciones en llamarse entre ellas, cÛmo se enlazan, etc.
-   (la estructura de ejecuciÛn del programa)
+  *El flat profile: una tabla que nos muestra cu√°nto se demora cada funci√≥n. Es importante que modularizemos el c√≥digo.
+  *El call graph: nos dice los tiempos que demoran las distintas funciones en llamarse entre ellas, c√≥mo se enlazan, etc.
+   (la estructura de ejecuci√≥n del programa)
   
  .Uso del profiler:
     1) se recompila con determinada bandera
-    2) se ejecuta el cÛdigo
+    2) se ejecuta el c√≥digo
     3) se utililiza la herramienta
     4) se analiza el reporte
 
@@ -189,28 +189,28 @@ Elapsed time:
    time ./a.out
    /usr/bin/time ./a.out
 
-  Timers internos: se usa la librerÌa chrono
+  Timers internos: se usa la librer√≠a chrono
 
     g++ -fconcepts timers.2cpp
     /usr/bin/time ./a.out 5000 6000
 
-  .Es necesario ejecutarlo varais veces e inventarse casos que demoren varios segundos para tener mayor resoluciÛn.
+  .Es necesario ejecutarlo varais veces e inventarse casos que demoren varios segundos para tener mayor resoluci√≥n.
        
   .Usando gprof:
 
      g++ -fconcepts -pg timers2.cpp
-     ./a.out 4000 6000  #aquÌ se crea el gmon.out
+     ./a.out 4000 6000  #aqu√≠ se crea el gmon.out
      gprof ./a.out gmon.out | most  #se enlazan y se abre en el paginador
      gprof ./a.out gmon.out > report.txt #guardando el reporte
 
-OptmizaciÛn:
-  *La m·s importante es recorrer los arreglos de forma continua
+Optmizaci√≥n:
+  *La m√°s importante es recorrer los arreglos de forma continua
   *Banderas:
-  $ gcc -O2 operations.c -lm #segundo nivel de optimizaciÛn
-  $ gcc -O3 operations.c -lm #tercer nivel de optimizaciÛn, algo peligroso porque puede cambiar ligeramente los datos
+  $ gcc -O2 operations.c -lm #segundo nivel de optimizaci√≥n
+  $ gcc -O3 operations.c -lm #tercer nivel de optimizaci√≥n, algo peligroso porque puede cambiar ligeramente los datos
 
 Perf:
-  . InstalaciÛn:
+  . Instalaci√≥n:
 
     $ su -
     # cd /usr/src/linux/tools/perf
@@ -221,13 +221,20 @@ Perf:
   . Uso: compilamos con la bandera -pg, con la cual le indicamos al compilador que haremos profiling
 
     g++ -pg -fconcepts gprof
-    perf stat ./a.out 5000 6000 #un informe poco especÌfico
+    perf stat ./a.out 5000 6000 #un informe poco espec√≠fico
     perf record ./a.out 5000 6000 #crea un informa detallado
     perf report  #se abre en la interfaz
 
-Hotspot: interfaz gr·fica para perf
+Hotspot: interfaz gr√°fica para perf
 
     $ chmod +x ~/Downloads/Hotspot-git.a57c985-x86_64.AppImage #cambiando el modo a ejecutable
+    $ ~/Downloads/Hotspot-git.a57c985-x86_64.AppImage perf.data
+
+Cachegrind:
+    $ g++ -g gprof_example.cpp #para obtener informaci√≥n de las l√≠neas
+    $ valgrind --tool=cachegrind ./a.out 5000 6000
+
+
   
 
 

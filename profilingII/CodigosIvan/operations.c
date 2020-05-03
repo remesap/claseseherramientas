@@ -49,20 +49,22 @@ int main(){
   printf("Time to compute divisions:\t %f\n", ((double)cputime2)/CLOCKS_PER_SEC);
 
   cputime1 = clock();
-  for (i=0; i<n; i++)
+  for (i=0; i<n; i++){
     tmp = 1.0/(i+1);
     for (j=0; j<n; j++)
       for (k=0; k<n; k++)
         a[i][j][k] = ((float)k)*tmp;
+  }
   cputime2 = clock() - cputime1;
   printf("Time to compute multiplications:\t %f\n", ((double)cputime2)/CLOCKS_PER_SEC);
 
   cputime1 = clock();
-  for (i=0; i<n; i++)
+  for (i=0; i<n; i++){
     tmp = 1.0/(i+1);
     for (j=0; j<n; j++)
       for (k=0; k<n; k++)
         a[i][j][k] = ((float)k)*tmp+(float)j;
+  }
   cputime2 = clock() - cputime1;
   printf("Time to add-multiply floats:\t %f\n", ((double)cputime2)/CLOCKS_PER_SEC);
   return 0;
