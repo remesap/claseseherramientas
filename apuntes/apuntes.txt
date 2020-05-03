@@ -228,6 +228,14 @@ Perf:
 Hotspot: interfaz gráfica para perf
 
     $ chmod +x ~/Downloads/Hotspot-git.a57c985-x86_64.AppImage #cambiando el modo a ejecutable
+    $ ~/Downloads/Hotspot-git.a57c985-x86_64.AppImage perf.data
+
+Cachegrind:
+    $ g++ -g gprof_example.cpp #para obtener información de las líneas
+    $ valgrind --tool=cachegrind ./a.out 5000 6000
+    $ cg_annotate --auto=yes cachegrind.out.16951 > report2.txt
+    
+
   
 
 
