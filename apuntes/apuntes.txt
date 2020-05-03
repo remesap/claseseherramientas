@@ -184,14 +184,19 @@ Elapsed time:
    time ./a.out
    /usr/bin/time ./a.out
 
-Timers internos: se usa la librería chrono
+  Timers internos: se usa la librería chrono
 
-  g++ -fconcepts timers.2cpp
-  /usr/bin/time ./a.out 5000 6000
+    g++ -fconcepts timers.2cpp
+    /usr/bin/time ./a.out 5000 6000
 
   .Es necesario ejecutarlo varais veces e inventarse casos que demoren varios segundos para tener mayor resolución.
        
+  .Usando gprof:
 
+     g++ -fconcepts -pg timers2.cpp
+     ./a.out 4000 6000  #aquí se crea el gmon.out
+     gprof ./a.out gmon.out | most  #se enlazan y se abre en el paginador
+     gprof ./a.out gmon.out > report.txt #guardando el reporte
 
 
 
