@@ -112,7 +112,7 @@ INSTALAR Slpkg (manejador de paquetes para Slackware):
 
    cd Downloads
    wget https://gitlab.com/dslackw/slpkg/-/archive/3.8.6/slpkg-3.8.6.tar.bz2
-   tar xf slpkg-3.8.6.tar.bz2
+   tar -xf slpkg-3.8.6.tar.bz2
    cd slpkg-3.8.6
    sudo su   #nos da privilegios de root. (o simplemente escribir "su" y poner el password"       
    ./install.sh
