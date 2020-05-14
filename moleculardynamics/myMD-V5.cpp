@@ -28,10 +28,22 @@ void print_system(const std::vector<body> & bodies, double time);
 
 int main(void)
 {
+  // declaracion de los cuerpos
   std::vector<body> bodies(N);
 
-  initial_conditions(bodies);
-  compute_force(bodies);
+  // pre-processing
+  initial_conditions(bodies); // r(t=0), v(t=0)
+  compute_force(bodies); // f(t=0)
+  start_timeintegration(bodies, DT);
+
+  // processing
+  for (int step = 0; step < 500; ++step) {
+    double tstep = step*DT; 
+    std::cout << tstep << "  " << bodies[0].r[2] << std::endl;
+    timestep(bodies, DT); // actualiza r y v -> actualizar f
+    compute_force(bodies); // actualizar la fuerza
+  }
+
   print_system(bodies, 0);
 
   return 0;
@@ -54,9 +66,23 @@ void initial_conditions(std::vector<body> & bodies)
 }
 
 void timestep(std::vector<body> & bodies, double dt)//nueva posicion y velocidad
+{
+  for (auto & cuerpo : bodies) {
+    for(int ii = 0; ii <= 2; ++ii) { //loop unrolling (?)
+      cuerpo.v[ii] += dt*cuerpo.f[ii]/cuerpo.mass;
+      cuerpo.r[ii] += cuerpo.v[ii]*dt;
+    }
+  }
 }
 
-void start_timeintegration(std::vector<body> & bodies, double dt);
+void start_timeintegration(std::vector<body> & bodies, double dt)
+{
+  for (auto & cuerpo : bodies) {
+    for(int ii = 0; ii <= 2; ++ii) {
+      cuerpo.v[ii] = cuerpo.v[ii] - dt*cuerpo.f[ii]/(2*cuerpo.mass);
+    }
+  }
+}
 
 void compute_force(std::vector<body> & bodies)
 {
