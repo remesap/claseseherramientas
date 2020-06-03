@@ -234,7 +234,11 @@ Cachegrind:
     $ g++ -g gprof_example.cpp #para obtener información de las líneas
     $ valgrind --tool=cachegrind ./a.out 5000 6000
     $ cg_annotate --auto=yes cachegrind.out.16951 > report2.txt
-    
+
+Trabajar de forma remota:
+
+   $ ssh -p 443 remesap@168.176.35.111
+
 
   
 
