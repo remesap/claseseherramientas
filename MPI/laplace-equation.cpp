@@ -15,7 +15,11 @@ void boundary_conditions(Matrix & m);
 void evolve(Matrix & m);
 void print(const Matrix & m);
 
-//para agregar el círculo evaluar ii*delta^2 + jj*delta^2 - r^2 y poner los M[ii,jj]=0;
+/*para agregar el círculo miramos qué valores x, y cumplan con que (x^2 + y^2) se aproxime a r^2
+  -para lo anterior usamos la condición de que |(x^2 + y^2) - r^2| < 0.001 (un valor cercano a 0)
+  -luego buscamos los M(i,j) correspondientes a  estos puntos (x, y) sabiendo que x = i*DELTA y y = j*DELTA
+   y hacemos M(i,j) = 0 (voltaje requerido en la frontera que determina el anillo)
+*/
 int main(void)
 {
   std::cout.precision(6);
